@@ -1,0 +1,12 @@
+# Hiding the following from the world (for now)...
+C\ Snippets/
+C++\ Snippets/
+Swift\ Snippets/
+Java\ Snippets/
+Python\ Snippets/Problems/
+
+# Misc
+*.DS_Store
+*.out
+*.exe
+*.class
