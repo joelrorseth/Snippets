@@ -9,33 +9,24 @@
 # Joel Rorseth
 #
 
-# Suffix only stores start index, not actual sliced text
-class Suffix:
-
-    def __init__(self, s, i):
-        self.string = s
-        self.index = i
-
-    def __lt__(self, other):
-        return self.string[self.index:] < other.string[other.index:]
-
-    def to_string(self):
-        return self.string[self.index:]
-
-
 # Suffix Array construction is O(n lgn)
 class SuffixArray:
 
-    def __init__(self, text):
-        self.suffixes = [Suffix(text, i) for i in range(len(text))]
-        self.suffixes.sort()
+    def __init__(self, s):
+        self.string = s
+        self.isuffixes = sorted(range(len(s)), key=lambda i: s[i:])
 
     def list(self):
-        for s in self.suffixes:
-            print(s.to_string())
+        for i in self.isuffixes:
+            print(self.string[i:])
 
+    # LCP of two suffixes starting at given indices
+    def lcp(self, i, j):
+        longest = ""
+        n = len(self.string)
+        while i < n and j < n and self.string[i]==self.string[j]:
+            longest += self.string[i]
+            i += 1
+            j += 1
+        return longest
 
-
-# Driver
-sa = SuffixArray("hello")
-sa.list()
