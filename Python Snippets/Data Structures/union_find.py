@@ -17,14 +17,21 @@
 class DisjointSet:
     def __init__(self, num_elements):
         self.parent_of = list(range(num_elements))
+        self.num_subsets = num_elements
 
     def find(self, k):
         return k if self.parent_of[k] == k else self.find(self.parent_of[k])
 
     def union(self, a, b):
-        self.parent_of[self.find(a)] = self.find(b)
+        parent_of_a = self.find(a)
+        parent_of_b = self.find(b)
+
+        if parent_of_a != parent_of_b:
+            self.num_subsets -= 1
+            self.parent_of[parent_of_a] = parent_of_b
 
     def print_groups(self):
+        print("The DisjointSet contains %d subsets" % self.num_subsets)
         for k in range(len(self.parent_of)):
             print(k, "=> Group", self.find(k))
 
